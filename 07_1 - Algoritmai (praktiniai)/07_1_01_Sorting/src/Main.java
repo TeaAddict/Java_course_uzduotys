@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class Main {
   public static void main(String[] args) {
     // write testcode here
-    int[] values = {-1, 6, 9, 8, 12};
-    System.out.println("Index of the smallest: " + indexOfTheSmallestStartingFrom(values, 1));
+    int[] values = {8, 3, 7, 9, 1, 2, 4};
+    sort(values);
   }
 
   public static int smallest(int[] array) {
@@ -22,18 +24,30 @@ public class Main {
   }
 
   public static int indexOfTheSmallestStartingFrom(int[] array, int index) {
-    int[] slicedArr = new int[array.length - index];
-    int j = 0;
+    int smallestNum = array[index];
+    int smallestIndex = index;
     for (int i = index; i < array.length; i++) {
-      slicedArr[j] = array[i];
-      j++;
+      if (array[i] < smallestNum) {
+        smallestNum = array[i];
+        smallestIndex = i;
+      }
     }
+    return smallestIndex;
+  }
 
-    int smallestNum = smallest(slicedArr);
+  public static void swap(int[] array, int index1, int index2) {
+    int oldNum = array[index1];
 
-    for (int i = index; i < slicedArr.length; i++) {
-      if (slicedArr[i] == smallestNum) return i;
+    array[index1] = array[index2];
+    array[index2] = oldNum;
+  }
+
+  public static void sort(int[] array) {
+    for (int i = 0; i < array.length; i++) {
+      int indexOfSmallestNum = indexOfTheSmallestStartingFrom(array, i);
+      swap(array, indexOfSmallestNum, i);
+
+      System.out.println(Arrays.toString(array));
     }
-    return -1;
   }
 }
