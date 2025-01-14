@@ -1,72 +1,90 @@
 package console;
 
-import products.Product;
-import products.SimpleProduct;
+import products.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Console {
-
-
     public static void run() {
         Scanner scanner = new Scanner(System.in);
 
         ArrayList<Product> products = new ArrayList<>();
 
+        System.out.println("\nTo quit, write 'quit', 'q' or enter empty field");
+        System.out.println("===================================================");
+
         while (true) {
-            System.out.println("\nTo quit, write 'quit', 'q' or enter empty field");
-            System.out.println("===================================================");
-
-            System.out.println("Creating new product...");
-            System.out.print("Enter product name: ");
-            String name = scanner.nextLine();
+            Product product = getProduct();
             System.out.println();
-
-            if (name.isEmpty() || name.equals("quit") || name.equals("q")) {
+            if (product == null) {
                 break;
             }
-
-//            System.out.print("Enter product price without tax: ");
-//            String priceWithoutTax = scanner.nextLine();
-//            System.out.println();
-//            if (priceWithoutTax.isEmpty() || priceWithoutTax.equals("quit") || priceWithoutTax.equals("q")) {
-//                break;
-//            }
-             double priceWithoutTax = Double.parseDouble(getUserInput("Enter product price without tax: ", "double"));
-
-
-
-
-            System.out.print("Enter product type (basic, medicine, alcohol, vine): ");
-            String productType = scanner.nextLine();
-            System.out.println();
-
-            if (productType.isEmpty() || productType.equals("quit") || productType.equals("q")) {
-                break;
-            }
-
-            if (productType.equals("basic")) {
-                products.add(new SimpleProduct(name, Double.parseDouble(priceWithoutTax)), )
-            } else if (productType.equals("medicine")) {
-
-            } else if (productType.equals("alcohol")) {
-
-            } else if (productType.equals("vine")) {
-
-            }
-
-
+            products.add(product);
         }
-        
-     
+
+        for (Product product : products) {
+            System.out.println(product);
+        }
     }
 
-    public static String getUserInput(String requestText, String requiredType){
+    private static Product getProduct() {
+        String name = (String) getUserInput("Enter product name: ", "String");
+
+        if (name.equals("quit")) {
+            return null;
+        }
+
+        Object priceWithoutTax = getUserInput("Enter product price without tax: ", "Double");
+
+        if (priceWithoutTax.equals("quit")) {
+            return null;
+        }
+
+        double priceWithoutTaxDouble = (double) priceWithoutTax;
+
+        while (true) {
+            String productType = (String) getUserInput("Enter product type: ", "String");
+
+            switch (productType) {
+                case "Basic", "basic" -> {
+                    return new SimpleProduct(name, priceWithoutTaxDouble);
+                }
+                case "Medicine", "medicine" -> {
+                    return new Medicine(name, priceWithoutTaxDouble);
+                }
+                case "Alcohol", "alcohol" -> {
+                    Object alcoholStrengthRes = getUserInput("Enter alcohol strength: ", "Double");
+                    if (priceWithoutTax.equals("quit")) {
+                        return null;
+                    }
+                    double alcoholStrength = (double) alcoholStrengthRes;
+
+                    return new AlcoholicProduct(name, priceWithoutTaxDouble, alcoholStrength);
+                }
+                case "Vine", "vine" -> {
+                    Object alcoholStrengthRes = getUserInput("Enter alcohol strength: ", "Double");
+                    if (priceWithoutTax.equals("quit")) {
+                        return null;
+                    }
+                    double alcoholStrength = (double) alcoholStrengthRes;
+
+                    return new Vine(name, priceWithoutTaxDouble, alcoholStrength);
+                }
+                case "Quit", "quit" -> {
+                    return null;
+                }
+            }
+
+            System.out.println("Incorrect product type, needs: Basic, Alcohol, Medicine, Vine");
+        }
+    }
+
+    private static Object getUserInput(String requestText, String requiredType) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(requestText);
-        
+
         while (true) {
 
             String input = scanner.nextLine();
@@ -74,14 +92,17 @@ public class Console {
             if (input.isEmpty() || input.equals("quit") || input.equals("q")) {
                 return "quit";
             }
-            
-            if (requiredType.equals("double")) {
+
+            if (requiredType.equals("Double")) {
                 try {
-                    Double.parseDouble(input);
-                    return input;
-                } catch (NumberFormatException e){
-                    System.out.println("Wrong input!");
+                    return Double.parseDouble(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("Wrong input! Please enter number: ");
                 }
+            }
+
+            if (requiredType.equals("String")) {
+                return input;
             }
         }
     }
