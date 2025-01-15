@@ -80,7 +80,7 @@ public class Console {
         }
     }
 
-    private static Object getUserInput(String requestText, String requiredType) {
+    private static <T>Object getUserInput(String requestText, String requiredType) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println(requestText);
