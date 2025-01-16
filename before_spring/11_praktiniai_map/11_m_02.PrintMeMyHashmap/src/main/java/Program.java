@@ -29,7 +29,7 @@ public class Program {
 
     public static void printKeysWhere(HashMap<String,String> hashmap, String text){
         for (Map.Entry<String, String> keyVal : hashmap.entrySet()){
-            if (keyVal.getValue().equals(text)){
+            if (keyVal.getValue().contains(text)){
                 System.out.println(keyVal.getKey());
             }
         }
