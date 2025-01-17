@@ -122,7 +122,7 @@ public class StreamPraktiniai {
     }
 
     public static Map<Boolean, Map<Integer, List<User>>> groupByGenderAndAge(List<User> users){
-        return users.stream().collect(Collectors.groupingBy())
+//        return users.stream().collect(Collectors.groupingBy())
     }
 
     public static Map<Boolean, Long> countGender(List<User> users){
