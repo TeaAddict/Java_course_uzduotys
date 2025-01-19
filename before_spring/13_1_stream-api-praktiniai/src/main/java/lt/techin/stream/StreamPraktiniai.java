@@ -122,15 +122,14 @@ public class StreamPraktiniai {
     }
 
     public static Map<Boolean, Map<Integer, List<User>>> groupByGenderAndAge(List<User> users){
-//        return users.stream().collect(Collectors.groupingBy())
+        return users.stream().collect(Collectors.partitioningBy(User::isMale, Collectors.groupingBy(User::getAge)));
     }
 
     public static Map<Boolean, Long> countGender(List<User> users){
-        throw new UnsupportedOperationException("Not implemented");
+        return users.stream().collect(Collectors.partitioningBy(User::isMale, Collectors.counting()));
     }
 
     public static IntSummaryStatistics ageSummaryStatistics(List<User> users){
-        throw new UnsupportedOperationException("Not implemented");
+        return users.stream().collect(Collectors.summarizingInt(User::getAge));
     }
-
 }

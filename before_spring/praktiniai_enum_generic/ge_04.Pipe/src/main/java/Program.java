@@ -15,7 +15,7 @@ public class Program {
 //        while(pipe.isInPipe()) {
 //            System.out.println(pipe.takeFromPipe());
 //        }
-        
+
         Pipe<Integer> numberPipe = new Pipe<>();
         numberPipe.putIntoPipe(1);
         numberPipe.putIntoPipe(2);
