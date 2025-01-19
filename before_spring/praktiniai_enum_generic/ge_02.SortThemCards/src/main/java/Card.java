@@ -40,7 +40,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card other) {
-        int res = Integer.compare(value, other.value);
+        int res = Integer.compare( other.value, value);
         if (res != 0) {
             return res;
         } else {
