@@ -10,8 +10,8 @@ public class ProductStorageImpl implements ProductStorage {
     }
 
     @Override
-    public Product getProduct(String id) {
-        return products.stream().filter(product -> product.getId().equals(id)).findAny().orElseThrow();
+    public Product getProduct(String name) {
+        return products.stream().filter(product -> product.getName().equalsIgnoreCase(name)).findAny().orElseThrow();
     }
 
     @Override
@@ -36,5 +36,6 @@ public class ProductStorageImpl implements ProductStorage {
         Product product = getProduct(id);
         product.setStockQuant(product.getStockQuant() - stock);
     }
+
 
 }

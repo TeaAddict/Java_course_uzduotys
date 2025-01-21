@@ -1,7 +1,9 @@
 import utils.CurrencyConverter;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class SupermarketServiceImpl implements SupermarketService {
     private static SupermarketServiceImpl instance;
@@ -42,10 +44,27 @@ public class SupermarketServiceImpl implements SupermarketService {
 
         System.out.println("Initial Cash Inventory:");
         printCashInv();
-        System.out.println();
 
         while (true) {
-            scanner.nextLine();
+            System.out.print("\nWhat would you like to buy? Type in the name of the desired product: ");
+            String input = scanner.nextLine();
+            System.out.println();
+
+            Product product;
+            try {
+                product = getProductStorage().getProduct(input);
+                System.out.println(product + "\n");
+            } catch (Exception e) {
+                System.out.println("Error: Product not available!\n");
+                continue;
+            }
+
+            System.out.println("You are trying to buy " + product.getName().toUpperCase() + ". You need to pay " + CurrencyConverter.centToEur(product.getPrice()) + ".");
+            System.out.println("Provide bill or coin (accepted values: " + getAcceptableValues() + "):");
+            String paymentVal = scanner.nextLine();
+
+            System.out.println("You paid " + CurrencyConverter.centToEur(product.getPrice()).subtract(cashRegister.getDebt()) + " in total.");
+
         }
     }
 
@@ -54,10 +73,16 @@ public class SupermarketServiceImpl implements SupermarketService {
         getProductStorage().getProducts().forEach(product -> System.out.println(product.getName().toUpperCase() + " Quantity: " + product.getStockQuant()));
     }
 
+
     @Override
     public void printCashInv() {
         Map<Integer, Integer> currencyStock = getCashRegister().getCurrencyStock();
-        currencyStock.forEach((key, val) -> System.out.println("Value: " + CurrencyConverter.centsToEuros(key) + ", quantity: " + val));
+        currencyStock.forEach((key, val) -> System.out.println("Value: " + CurrencyConverter.centToEur(key) + ", quantity: " + val));
+    }
+
+    @Override
+    public String getAcceptableValues() {
+        return cashRegister.getAcceptedValuesBigDec().stream().map(BigDecimal::toString).collect(Collectors.joining(", "));
     }
 
     @Override

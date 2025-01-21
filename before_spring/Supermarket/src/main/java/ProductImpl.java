@@ -44,4 +44,14 @@ public class ProductImpl implements Product {
     public void setStockQuant(int stockQuant) {
         this.stockQuant = stockQuant;
     }
+
+    @Override
+    public String toString() {
+        return "ProductImpl{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", priceInCents=" + priceInCents +
+                ", stockQuant=" + stockQuant +
+                '}';
+    }
 }

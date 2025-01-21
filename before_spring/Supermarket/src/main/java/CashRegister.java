@@ -3,16 +3,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface CashRegister {
-    // {
-    //  bills: {
-    //          200: 24,
-    //          10: 9
-    //          }
-    //  ,
-    //  coins: {
-    //          1: 9213,
-    //          2: 98,
-    // }
 
     public Map<Integer, Integer> getCurrencyStock();
 
@@ -23,5 +13,20 @@ public interface CashRegister {
     public void setCurrencyStock(int denomination, int stock);
 
     public boolean correctDenomination(int denomination);
+
+    public boolean checkPayment(BigDecimal num);
+
+    public List<BigDecimal> getAcceptedValuesBigDec();
+
+    public void payment(BigDecimal num);
+
+    public boolean needsChange();
+
+    public BigDecimal getChange();
+
+    public boolean isPayed();
+
+    public BigDecimal getDebt();
+    
 }
 
