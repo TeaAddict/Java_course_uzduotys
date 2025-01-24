@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class SafeNewsService implements NewsService {
 
     NewsService newsService;
-    private List<String> forbiddenWords = List.of("rupūs miltai",
+    private final List<String> forbiddenWords = List.of("rupūs miltai",
             "velniai rautų",
             "velnias",
             "velniais");
@@ -23,19 +23,26 @@ public class SafeNewsService implements NewsService {
 
     @Override
     public List<Article> getArticles() {
-        List<Article> baseList = newsService.getArticles();
-
-        List<Article> res = newsService.getArticles().stream().filter(article-> {
+        return newsService.getArticles().stream().filter(article-> {
                     for (String word : forbiddenWords) {
                         if (article.getHeading().toLowerCase().contains(word)) {
-                            return true;
+                            return false;
                         }
                     }
-                    return false;
-                }).collect(Collectors.toList());
+                    return true;
+                }).map(article ->
+                        {
+                            for (String word : forbiddenWords) {
+                                String lowerCaseBrief = article.getBrief();
+                                String lowerCasedWord = word.toLowerCase();
 
-
-        return res;
-
+                                if (lowerCaseBrief.contains(lowerCasedWord)) {
+                                    String formattedBrief = lowerCaseBrief.replaceAll(lowerCasedWord, "***");
+                                    return new ArticleImpl(article.getHeading(), formattedBrief);
+                                }
+                            }
+                            return article;
+                        })
+                .collect(Collectors.toList());
     }
 }
