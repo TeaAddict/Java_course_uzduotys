@@ -4,7 +4,7 @@ import java.util.List;
 public interface ProductStorage {
     public List<Product> getProducts();
 
-    public Product getProduct(String id);
+    public Product getProduct(String name);
 
     public void addProduct(Product product);
 

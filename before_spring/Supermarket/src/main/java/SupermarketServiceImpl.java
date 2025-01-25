@@ -1,8 +1,6 @@
-import utils.CurrencyConverter;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import java.util.Scanner;
+import java.math.RoundingMode;
 import java.util.stream.Collectors;
 
 public class SupermarketServiceImpl implements SupermarketService {
@@ -32,10 +30,12 @@ public class SupermarketServiceImpl implements SupermarketService {
         }
     }
 
-
     @Override
-    public String getAcceptableValues() {
-        return cashRegister.getAcceptedValuesBigDec().stream().map(BigDecimal::toString).collect(Collectors.joining(", "));
+    public String getAcceptableValuesEuros() {
+        return cashRegister.getAcceptedValuesBigDec().stream()
+                .map(val -> val.setScale(2, RoundingMode.HALF_UP).divide(BigDecimal.valueOf(100)))
+                .map(BigDecimal::toString)
+                .collect(Collectors.joining(", "));
     }
 
     @Override

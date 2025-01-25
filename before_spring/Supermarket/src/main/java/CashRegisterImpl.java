@@ -25,22 +25,18 @@ public class CashRegisterImpl implements CashRegister {
 
     int clientDebt = 0;
 
-    @Override
     public Map<Integer, Integer> getCurrencyStock() {
         return centCurrencyStocks;
     }
 
-    @Override
     public void reduceCurrencyStock(int denomination, int stock) {
         if (!correctDenomination(denomination)) {
             System.out.println("Incorrect denomination!");
             return;
         }
-
         centCurrencyStocks.compute(denomination, (k, currentStock) -> currentStock - stock);
     }
 
-    @Override
     public void increaseCurrencyStock(int denomination, int stock) {
         if (!correctDenomination(denomination)) {
             System.out.println("Incorrect denomination!");
@@ -50,7 +46,6 @@ public class CashRegisterImpl implements CashRegister {
         centCurrencyStocks.compute(denomination, (k, currentStock) -> currentStock + stock);
     }
 
-    @Override
     public void setCurrencyStock(int denomination, int stock) {
         if (!correctDenomination(denomination)) {
             System.out.println("Incorrect denomination!");
@@ -60,35 +55,26 @@ public class CashRegisterImpl implements CashRegister {
         centCurrencyStocks.put(denomination, stock);
     }
 
-    @Override
     public boolean correctDenomination(int denomination) {
         return centCurrencyStocks.containsKey(denomination);
     }
 
-    @Override
     public boolean checkPayment(BigDecimal num) {
-        if (!correctDenomination(CurrencyConverter.eurToCent(num))) {
-            return false;
-        }
-        return true;
+        return correctDenomination(CurrencyConverter.eurToCent(num));
     }
 
-    @Override
     public List<BigDecimal> getAcceptedValuesBigDec() {
         return centCurrencyStocks.keySet().stream().map(BigDecimal::new).collect(Collectors.toList());
     }
 
-    @Override
     public void payment(BigDecimal num) {
         clientDebt -= CurrencyConverter.eurToCent(num);
     }
 
-    @Override
     public boolean needsChange() {
         return clientDebt < 0;
     }
 
-    @Override
     public BigDecimal getChange() {
         if (needsChange()) {
             return CurrencyConverter.centToEur(clientDebt).multiply(new BigDecimal(-1));
@@ -96,15 +82,15 @@ public class CashRegisterImpl implements CashRegister {
         return new BigDecimal(0);
     }
 
-
-    @Override
     public boolean isPayed() {
         return clientDebt <= 0;
     }
 
-    @Override
     public BigDecimal getDebt() {
         return CurrencyConverter.centToEur(clientDebt);
     }
-    
+
+    public void setClientDebt(int clientDebt) {
+        this.clientDebt = clientDebt;
+    }
 }

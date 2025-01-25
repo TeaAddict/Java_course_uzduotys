@@ -17,6 +17,7 @@ public class Main {
 
         SupermarketService supermarket = SupermarketServiceImpl.getSupermarketService(cashRegister, productStorage);
 
-        supermarket.open();
+
+        new ConsoleImpl(supermarket).start();
     }
 }
