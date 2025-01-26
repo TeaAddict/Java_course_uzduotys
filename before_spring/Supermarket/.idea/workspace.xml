@@ -6,23 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="412a6aee-f45e-4328-b6b0-a17ffb0d887a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CashRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CashRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CashRegisterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CashRegisterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ConsoleImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ConsoleImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProductStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProductStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ProductStorageImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ProductStorageImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SupermarketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SupermarketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SupermarketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SupermarketServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CashRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CashRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CashRegisterImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CashRegisterImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CashRegisterImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CashRegisterImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ProductImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ProductImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ProductStorageImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ProductStorageImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SupermarketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupermarketService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SupermarketServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SupermarketServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/CurrencyConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/CurrencyConverter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +95,8 @@
       <workItem from="1737478890832" duration="12199000" />
       <workItem from="1737606791116" duration="14000" />
       <workItem from="1737730495491" duration="8770000" />
-      <workItem from="1737799654523" duration="7388000" />
+      <workItem from="1737799654523" duration="8688000" />
+      <workItem from="1737886170946" duration="44000" />
     </task>
     <servers />
   </component>
