@@ -27,6 +27,8 @@ public interface CashRegister {
     public boolean isPayed();
 
     public BigDecimal getDebt();
-    
+
+    public void setClientDebt(int clientDebt);
+
 }
 

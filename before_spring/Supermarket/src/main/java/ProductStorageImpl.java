@@ -32,8 +32,8 @@ public class ProductStorageImpl implements ProductStorage {
     }
 
     @Override
-    public void reduceStock(String id, int stock) {
-        Product product = getProduct(id);
+    public void reduceStock(String name, int stock) {
+        Product product = getProduct(name);
         product.setStockQuant(product.getStockQuant() - stock);
     }
 

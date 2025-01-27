@@ -1,9 +1,7 @@
 public interface SupermarketService {
-    public String getAcceptableValues();
+    public Object getAcceptableValuesEuros();
 
     public ProductStorage getProductStorage();
 
     public CashRegister getCashRegister();
-
-
 }
