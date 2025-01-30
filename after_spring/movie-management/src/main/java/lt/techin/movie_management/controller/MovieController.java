@@ -26,6 +26,10 @@ public class MovieController {
       return ResponseEntity.notFound().build();
     }
 
+    if (index < 0 || index >= movies.size()) {
+      return ResponseEntity.notFound().build();
+    }
+
     return ResponseEntity.ok(movies.get(index));
   }
 
@@ -47,7 +51,9 @@ public class MovieController {
 
   @GetMapping("/movies/search")
   public ResponseEntity<List<Movie>> searchMovie(@RequestParam String title) {
-    List<Movie> res = movies.stream().filter(movie -> movie.getTitle().equalsIgnoreCase(title)).toList();
+    List<Movie> res = movies.stream()
+            .filter(movie -> movie.getTitle().equalsIgnoreCase(title))
+            .toList();
 
     return ResponseEntity.ok(res);
   }
