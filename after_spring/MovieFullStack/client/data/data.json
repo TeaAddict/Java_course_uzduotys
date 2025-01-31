@@ -1,0 +1,159 @@
+{
+    "books": [
+      {
+        "id": "qwe",
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Leee",
+        "category": "Biography",
+        "price": "10.99",
+        "cover": "https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg",
+        "reserved": false
+      },
+      {
+        "id": "qwee",
+        "title": "A Brief History of Timeee",
+        "author": "Stephen Hawking",
+        "category": "A",
+        "price": 15.49,
+        "cover": "https://skyryedesign.com/wp-content/uploads/2016/04/56c6f9b7efad5-cover-books-design-illustrations.jpg",
+        "reserved": true
+      },
+      {
+        "id": "qwes",
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "category": "Fiction",
+        "price": 12.99,
+        "cover": "https://marketplace.canva.com/EAFfSnGl7II/2/0/1003w/canva-elegant-dark-woods-fantasy-photo-book-cover-vAt8PH1CmqQ.jpg",
+        "reserved": true
+      },
+      {
+        "id": "qwez",
+        "title": "Educated",
+        "author": "Tara Westover",
+        "category": "Biography",
+        "price": 14.99,
+        "cover": "https://miblart.com/wp-content/uploads/2023/11/81NMoMc9eeL._SL1500_-673x1024.jpg",
+        "reserved": false
+      },
+      {
+        "id": "qwec",
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "category": "Science Fiction",
+        "price": 18.99,
+        "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ6I3qh_LXrv3cekXyKNfj2co8QR98K0brUA&s",
+        "reserved": false
+      },
+      {
+        "id": "qweaa",
+        "title": "1984",
+        "author": "George Orwell",
+        "category": "Dystopian",
+        "price": 9.99,
+        "cover": "https://www.writersdigest.com/.image/t_share/MTcxMDY0NzcxMzIzNTY5NDEz/image-placeholder-title.jpg",
+        "reserved": false
+      },
+      {
+        "id": "qwegg",
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "category": "Romance",
+        "price": 11.99,
+        "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiSGWHOMnB4uoqG_brgk_phr9ltFKZOTHIMg&s",
+        "reserved": false
+      },
+      {
+        "id": "qwev",
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "category": "Fiction",
+        "price": 10.49,
+        "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLDYz_BgDvi8K1xRr65VCo5lNTcksYF0LR1Q&s",
+        "reserved": false
+      },
+      {
+        "id": "qwe",
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "category": "Fantasy",
+        "price": 13.95,
+        "cover": "https://cdn.myportfolio.com/560d16623f9c2df9615744dfab551b3d/e50c016f-b6a8-4666-8fb8-fe6bd5fd9fec_rw_1920.jpeg?h=dc627898fc5eac88aa791fb2b124ecbd",
+        "reserved": false
+      },
+      {
+        "id": "qwe",
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "category": "Adventure",
+        "price": 16.99,
+        "cover": "https://miblart.com/wp-content/uploads/2023/11/9780553387681.webp",
+        "reserved": false
+      },
+      {
+        "id": "5165",
+        "title": "zxc",
+        "author": "asd",
+        "category": "qwe",
+        "price": "1",
+        "cover": "https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg"
+      },
+      {
+        "id": "a8fb",
+        "title": "zzz",
+        "author": "ff",
+        "category": "ss",
+        "price": "3",
+        "cover": "https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg"
+      },
+      {
+        "id": "9ad5",
+        "title": "Book name",
+        "author": "Author",
+        "category": "Category",
+        "price": "11.99",
+        "cover": "https://images.penguinrandomhouse.com/cover/9780593422182"
+      },
+      {
+        "id": "58ee",
+        "title": "Book2",
+        "author": "Author E",
+        "category": "Cat2",
+        "price": "99.99",
+        "cover": "https://images.penguinrandomhouse.com/cover/9780593422182"
+      },
+      {
+        "id": "cbb4",
+        "title": "Title5",
+        "author": "Author D",
+        "category": "Action",
+        "price": "9",
+        "cover": "https://images.penguinrandomhouse.com/cover/9780593422182"
+      },
+      {
+        "id": "774d",
+        "title": "Eeeeeeee",
+        "author": "zzzzzz",
+        "category": "dystopian",
+        "price": "2222",
+        "cover": "https://images.penguinrandomhouse.com/cover/9780593422182"
+      },
+      {
+        "id": "0715",
+        "title": "Tes",
+        "author": "Zee",
+        "category": "Adventure",
+        "price": "88",
+        "cover": "https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg",
+        "reserved": false
+      },
+      {
+        "id": "c190",
+        "title": "Frog",
+        "author": "Pepe",
+        "category": "Adventure",
+        "price": "12.5",
+        "cover": "https://skyryedesign.com/wp-content/uploads/2016/04/56c6f9b7efad5-cover-books-design-illustrations.jpg"
+      }
+    ]
+  }

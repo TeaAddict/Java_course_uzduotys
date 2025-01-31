@@ -1,0 +1,8 @@
+"comment with line" = ctrl + /
+"move line up" = alt + Up
+"move line down" = alt + Down
+"duplicate line" = alt + shift + down
+"add selection for next occurrence" = ctrl + D
+"indent line" = ctrl + ]
+"unindent line" = ctrl + [
+"soft wrap" = alt + z
