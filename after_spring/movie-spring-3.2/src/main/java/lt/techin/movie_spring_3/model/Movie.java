@@ -1,16 +1,13 @@
 package lt.techin.movie_spring_3.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "movies")
 public class Movie {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String title;
@@ -43,4 +40,6 @@ public class Movie {
   public void setDirector(String director) {
     this.director = director;
   }
+
+
 }
