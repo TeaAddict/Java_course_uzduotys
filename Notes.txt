@@ -1,0 +1,42 @@
+
+=====================================================
+
+Keybinds from VsCode to Intellij
+-----------------------------------------------------
+"comment with line" = ctrl + /
+"move line up" = alt + Up
+"move line down" = alt + Down
+"duplicate line" = alt + shift + down
+"add selection for next occurrence" = ctrl + D
+"indent line" = ctrl + ]
+"unindent line" = ctrl + [
+"soft wrap" = alt + z
+
+=====================================================
+
+RUN DOCKER SQL containers:
+-----------------------------------------------------
+start MySql db
+-----------------------------------------------------
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:8.0
+-----------------------------------------------------
+start PhpMyAdmin mysql interface
+-----------------------------------------------------
+docker run --name phpmyadmin -d --link some-mysql:db -p 8081:80 phpmyadmin
+
+=====================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
