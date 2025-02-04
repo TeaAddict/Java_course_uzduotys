@@ -26,20 +26,16 @@ public class GlobalExceptionHandler {
     return ResponseEntity.badRequest().body(errors);
   }
 
-//  public ResponseEntity<Map<String, String>> handleValidationErrors(ConstraintViolationException ex) {
-//
-//    // Serializes to JSON, using Jackson
-//    Map<String, String> errors = new HashMap<>();
-//
-////    ex.getMessage();
-//    ex.getMessage
-////    ex.getBindingResult().getFieldErrors().forEach(error ->
-////            errors.put(error.getField(), error.getDefaultMessage())
-////    );
-//
-//    return ResponseEntity.badRequest().body(errors);
-//  }
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity<Map<String, String>> handleValidationErrors(ConstraintViolationException ex) {
+
+    // Serializes to JSON, using Jackson
+    Map<String, String> errors = new HashMap<>();
+
+    ex.getConstraintViolations().forEach(error -> {
+      errors.put(error.getPropertyPath().toString(), error.getMessage());
+    });
+
+    return ResponseEntity.badRequest().body(errors);
+  }
 }
-
-
-//ConstraintViolationException

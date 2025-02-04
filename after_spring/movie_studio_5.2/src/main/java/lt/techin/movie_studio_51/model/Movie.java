@@ -20,8 +20,10 @@ public class Movie {
   @Size(min = 2, max = 50)
   private String name;
 
+  @NotNull
   @Pattern(regexp = "^[A-Z][a-z]*$")
   private String director;
+
   private String description;
 
   @NotNull(message = "idk test")
