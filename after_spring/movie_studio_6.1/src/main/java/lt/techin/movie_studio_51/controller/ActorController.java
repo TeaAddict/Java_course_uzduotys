@@ -30,8 +30,9 @@ public class ActorController {
   }
 
   @PostMapping("/actors")
-  public ResponseEntity<ActorDTO> saveActor(@Valid @RequestBody Actor actor) {
-
+  public ResponseEntity<ActorDTO> saveActor(@Valid @RequestBody ActorDTO actorDTO) {
+    Actor actor = ActorMapper.toActor(actorDTO);
+    
     Actor savedActor = actorService.saveActor(actor);
     ActorDTO savedActorDTO = ActorMapper.toActorDTO(savedActor);
 

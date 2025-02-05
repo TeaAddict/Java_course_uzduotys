@@ -17,4 +17,8 @@ public class ActorMapper {
     return new ActorDTO(actor.getName(), actor.getAge());
   }
 
+  public static Actor toActor(ActorDTO actorDTO) {
+    return new Actor(actorDTO.name(), actorDTO.age());
+  }
+
 }
