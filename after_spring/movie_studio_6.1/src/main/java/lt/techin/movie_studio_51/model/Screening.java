@@ -15,12 +15,8 @@ public class Screening {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotNull
-  @Size(min = 2, max = 50, message = "Name size should be between 2 and 50")
   private String theaterName;
 
-  @NotNull
-  @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$", message = "Date time format incorrect, correct example: 2000-01-01T00:00:00")
   private LocalDateTime screeningTime;
 
   public Screening() {

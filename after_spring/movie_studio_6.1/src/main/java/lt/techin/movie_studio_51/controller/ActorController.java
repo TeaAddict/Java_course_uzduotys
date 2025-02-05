@@ -1,6 +1,8 @@
 package lt.techin.movie_studio_51.controller;
 
 import jakarta.validation.Valid;
+import lt.techin.movie_studio_51.dto.ActorDTO;
+import lt.techin.movie_studio_51.dto.ActorMapper;
 import lt.techin.movie_studio_51.model.Actor;
 import lt.techin.movie_studio_51.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +23,23 @@ public class ActorController {
   }
 
   @GetMapping("/actors")
-  public ResponseEntity<List<Actor>> getAllActors() {
+  public ResponseEntity<List<ActorDTO>> getAllActors() {
     List<Actor> actors = actorService.getAllActors();
-    return ResponseEntity.ok().body(actors);
+    List<ActorDTO> actorsDTO = ActorMapper.toActorDTOLIST(actors);
+    return ResponseEntity.ok().body(actorsDTO);
   }
 
   @PostMapping("/actors")
-  public ResponseEntity<Actor> saveActor(@Valid @RequestBody Actor actor) {
+  public ResponseEntity<ActorDTO> saveActor(@Valid @RequestBody Actor actor) {
 
     Actor savedActor = actorService.saveActor(actor);
+    ActorDTO savedActorDTO = ActorMapper.toActorDTO(savedActor);
 
     return ResponseEntity.created(ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .replacePath("/actor/{id}")
                     .buildAndExpand(actor.getId())
                     .toUri())
-            .body(savedActor);
+            .body(savedActorDTO);
   }
 }

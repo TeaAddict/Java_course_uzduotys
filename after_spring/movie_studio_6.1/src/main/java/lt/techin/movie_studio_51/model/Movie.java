@@ -16,16 +16,13 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotNull
-  @Size(min = 2, max = 50)
   private String name;
 
-  @Pattern(regexp = "^[A-Z][a-z]*$")
   private String director;
   private String description;
 
-  @NotNull(message = "idk test")
-  @NotEmpty(message = "My guy pls put some sunscreening")
+  //  @NotNull(message = "idk test")
+//  @NotEmpty(message = "My guy pls put some sunscreening")
   @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "movie_id")
   private List<Screening> screenings;

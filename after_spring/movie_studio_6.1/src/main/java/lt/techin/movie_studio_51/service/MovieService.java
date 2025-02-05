@@ -2,7 +2,11 @@ package lt.techin.movie_studio_51.service;
 
 import lt.techin.movie_studio_51.model.Movie;
 import lt.techin.movie_studio_51.repository.MovieRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +25,14 @@ public class MovieService {
     return movieRepository.findAll();
   }
 
+  public Optional<Movie> getMovieById(long id) {
+    return movieRepository.findById(id);
+  }
+
+  public List<Movie> getAllMoviesByName(String name) {
+    return movieRepository.findAllMoviesByName(name);
+  }
+
   public Movie saveMovie(Movie movie) {
     return movieRepository.save(movie);
   }
@@ -31,5 +43,14 @@ public class MovieService {
 
   public Optional<Movie> findMovieById(long id) {
     return movieRepository.findById(id);
+  }
+
+  public void deleteMovie(long id) {
+    movieRepository.deleteById(id);
+  }
+
+  public Page<Movie> findAllMoviesPage(int page, int size) {
+    Pageable pageObj = PageRequest.of(page, size);
+    return movieRepository.findAll(pageObj);
   }
 }

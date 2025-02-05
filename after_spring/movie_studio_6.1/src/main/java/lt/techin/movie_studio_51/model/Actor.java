@@ -14,12 +14,8 @@ public class Actor {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotNull
-  @Size(min = 2, max = 50, message = "Actor name size should be between 2-50 characters")
   private String name;
-
-  @Min(value = 18, message = "Minimum age is 18")
-  @Max(value = 110, message = "Maximum age is 130")
+  
   private int age;
 
   public Actor(String name, int age) {
