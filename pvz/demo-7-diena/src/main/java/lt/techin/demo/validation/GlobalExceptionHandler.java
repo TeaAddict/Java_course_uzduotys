@@ -1,9 +1,12 @@
-package lt.techin.movie_studio_51.validation;
+package lt.techin.demo.validation;
 
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -28,14 +31,14 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<Map<String, String>> handleValidationErrors(ConstraintViolationException ex) {
 
-    // Serializes to JSON, using Jackson
     Map<String, String> errors = new HashMap<>();
 
-    ex.getConstraintViolations().forEach(error -> {
-      errors.put(error.getPropertyPath().toString(), error.getMessage());
+    ex.getConstraintViolations().forEach(violation -> {
+      errors.put(violation.getPropertyPath().toString(),
+              violation.getMessage());
     });
+
 
     return ResponseEntity.badRequest().body(errors);
   }
-
 }
