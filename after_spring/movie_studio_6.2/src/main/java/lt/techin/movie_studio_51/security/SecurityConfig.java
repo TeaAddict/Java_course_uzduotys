@@ -16,11 +16,15 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(Customizer.withDefaults())
+//    http.csrf(Customizer.withDefaults())
+    http.csrf(c -> c.disable())
             .httpBasic(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers(HttpMethod.GET, "/api/users")
-                    .hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/users/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/users/{id}").hasRole("ADMIN")
+                    .anyRequest().authenticated()
             );
 
     return http.build();

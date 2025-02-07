@@ -34,3 +34,8 @@ public class Role implements GrantedAuthority {
     return name;
   }
 }
+
+//CREATE TABLE roles (
+//        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+//        name VARCHAR(50) NOT NULL
+//);

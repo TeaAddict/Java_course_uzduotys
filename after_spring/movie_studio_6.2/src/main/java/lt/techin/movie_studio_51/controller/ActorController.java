@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ActorController {
-  ActorService actorService;
+  private final ActorService actorService;
 
   @Autowired
   public ActorController(ActorService actorService) {
@@ -32,7 +32,7 @@ public class ActorController {
   @PostMapping("/actors")
   public ResponseEntity<ActorDTO> saveActor(@Valid @RequestBody ActorDTO actorDTO) {
     Actor actor = ActorMapper.toActor(actorDTO);
-    
+
     Actor savedActor = actorService.saveActor(actor);
     ActorDTO savedActorDTO = ActorMapper.toActorDTO(savedActor);
 
