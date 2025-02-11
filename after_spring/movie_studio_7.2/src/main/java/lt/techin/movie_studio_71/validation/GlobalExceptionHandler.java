@@ -2,6 +2,7 @@ package lt.techin.movie_studio_71.validation;
 
 import jakarta.validation.ConstraintViolationException;
 import lt.techin.movie_studio_71.controller.ErrorResponse;
+import lt.techin.movie_studio_71.exception.AccessDeniedException;
 import lt.techin.movie_studio_71.exception.MovieAlreadyExistsException;
 import lt.techin.movie_studio_71.exception.UserAlreadyExistsException;
 import lt.techin.movie_studio_71.exception.UserNotFoundException;
@@ -54,6 +55,11 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MovieAlreadyExistsException.class)
   public ResponseEntity<ErrorResponse> handleMovieAlreadyExistsException(Exception ex) {
     return new ResponseEntity<>(new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(AccessDeniedException.class)
+  public ResponseEntity<ErrorResponse> handleAccessDeniedException(Exception ex) {
+    return new ResponseEntity<>(new ErrorResponse(ex.getMessage(), HttpStatus.FORBIDDEN.value()), HttpStatus.FORBIDDEN);
   }
 
   @ExceptionHandler(Exception.class)

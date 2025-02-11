@@ -5,19 +5,27 @@ import jakarta.websocket.server.PathParam;
 import lt.techin.movie_studio_71.dto.UserMapper;
 import lt.techin.movie_studio_71.dto.UserRequestDTO;
 import lt.techin.movie_studio_71.dto.UserResponseDTO;
+import lt.techin.movie_studio_71.exception.AccessDeniedException;
 import lt.techin.movie_studio_71.exception.UserAlreadyExistsException;
 import lt.techin.movie_studio_71.exception.UserNotFoundException;
 import lt.techin.movie_studio_71.model.Role;
 import lt.techin.movie_studio_71.model.User;
 import lt.techin.movie_studio_71.service.RoleService;
 import lt.techin.movie_studio_71.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -35,11 +43,24 @@ public class UserController {
   }
 
   @GetMapping("/users/{id}")
-  public ResponseEntity<UserResponseDTO> getUser(@PathVariable long id) {
-    return userService.findUserById(id)
-            .map(UserMapper::toUserResponseDTO)
-            .map(ResponseEntity::ok)
-            .orElseThrow(() -> new UserNotFoundException(id));
+  public ResponseEntity<?> getUser(@PathVariable long id, Authentication authentication) {
+
+    boolean isAdmin = (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(a -> a.equalsIgnoreCase("ROLE_ADMIN")));
+
+    if (!isAdmin) {
+      if (((User) authentication.getPrincipal()).getId() != id) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Can't update other users");
+      }
+    }
+
+    Optional<UserResponseDTO> userResponseDTO = userService.findUserById(id)
+            .map(UserMapper::toUserResponseDTO);
+
+    if (userResponseDTO.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    return ResponseEntity.ok(userResponseDTO.get());
   }
 
   @GetMapping("/users")
@@ -62,6 +83,7 @@ public class UserController {
 
     userService.findByUsername(userRequestDTO.username())
             .ifPresent(u -> {
+
               throw new UserAlreadyExistsException(u.getUsername());
             });
 
@@ -82,13 +104,43 @@ public class UserController {
             .body(userResponseDTO);
   }
 
+  @PutMapping("/users/{id}")
+  public ResponseEntity<?> updateUser(@PathVariable long id,
+                                      @Valid @RequestBody UserRequestDTO userRequestDTO,
+                                      Authentication authentication) {
+
+    boolean isAdmin = (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(a -> a.equalsIgnoreCase("ROLE_ADMIN")));
+
+    if (!isAdmin) {
+      if (((User) authentication.getPrincipal()).getId() != id) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Can't update other users");
+      }
+    }
+
+    User user = userService.findUserById(id)
+            .orElseThrow(() -> new UserNotFoundException(id));
+
+    user.setPassword(passwordEncoder.encode(userRequestDTO.password()));
+
+    return ResponseEntity.ok(UserMapper.toUserResponseDTO(user));
+  }
+
   @DeleteMapping("/users/{id}")
-  public ResponseEntity<?> deleteUser(@PathVariable long id) {
+  public ResponseEntity<?> deleteUser(@PathVariable long id, Authentication authentication) {
+
+    boolean isAdmin = (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).anyMatch(a -> a.equalsIgnoreCase("ROLE_ADMIN")));
+
+    if (!isAdmin) {
+      if (((User) authentication.getPrincipal()).getId() != id) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Can't update other users");
+      }
+    }
+
     userService.findUserById(id)
             .orElseThrow(() -> new UserNotFoundException(id));
 
     userService.deleteUser(id);
-    
+
     return ResponseEntity.noContent().build();
   }
 }
