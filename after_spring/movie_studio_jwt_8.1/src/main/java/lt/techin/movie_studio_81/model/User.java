@@ -85,13 +85,13 @@ public class User implements UserDetails {
 //        username VARCHAR(100) NOT NULL UNIQUE,
 //password VARCHAR(100) NOT NULL
 //);
-
+//
 //CREATE TABLE users_roles (
 //        id BIGINT PRIMARY KEY AUTO_INCREMENT,
 //        user_id BIGINT NOT NULL,
 //        role_id BIGINT NOT NULL
 //);
-
+//
 //CREATE TABLE users_roles (
 //        user_id BIGINT NOT NULL,
 //        role_id BIGINT NOT NULL,
