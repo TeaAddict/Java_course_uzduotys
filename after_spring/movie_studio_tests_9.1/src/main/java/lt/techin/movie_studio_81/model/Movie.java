@@ -41,9 +41,14 @@ public class Movie {
   )
   private List<Actor> actors;
 
-  public Movie(String name, String description) {
+  public Movie(String name, String director, String description) {
     this.name = name;
+    this.director = director;
     this.description = description;
+  }
+
+  public Movie(String name, String director) {
+    this(name, director, null);
   }
 
   public Movie() {
