@@ -3,6 +3,8 @@ package lt.techin.movie_studio_81.controller;
 import jakarta.validation.Valid;
 import lt.techin.movie_studio_81.dto.MovieDTO;
 import lt.techin.movie_studio_81.dto.MovieMapper;
+import lt.techin.movie_studio_81.dto.MovieRequestDTO;
+import lt.techin.movie_studio_81.dto.MovieResponseDTO;
 import lt.techin.movie_studio_81.exception.MovieAlreadyExistsException;
 import lt.techin.movie_studio_81.model.Movie;
 import lt.techin.movie_studio_81.service.MovieService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -28,16 +31,20 @@ public class MovieController {
   }
 
   @GetMapping("/movies")
-  public ResponseEntity<List<MovieDTO>> getAllMovies() {
-    List<MovieDTO> moviesDTO = MovieMapper.toMovieDTOList(movieService.getAllMovies());
-    return ResponseEntity.ok(moviesDTO);
+  public ResponseEntity<List<MovieResponseDTO>> getAllMovies() {
+    List<MovieResponseDTO> moviesResponseDTO = MovieMapper.toMovieDTOList(movieService.getAllMovies());
+    return ResponseEntity.ok(moviesResponseDTO);
   }
 
   @GetMapping("/movies/{id}")
-  public ResponseEntity<MovieDTO> getMovie(@PathVariable long id) {
-    Movie movie = movieService.getMovieById(id).get();
-    MovieDTO movieDTO = MovieMapper.toMovieDTO(movie);
-    return ResponseEntity.ok(movieDTO);
+  public ResponseEntity<MovieResponseDTO> getMovie(@PathVariable long id) {
+    Optional<Movie> movie = movieService.getMovieById(id);
+    if (movie.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    MovieResponseDTO movieResponseDTO = MovieMapper.toMovieDTO(movie.get());
+    return ResponseEntity.ok(movieResponseDTO);
   }
 
   @GetMapping("/movies/search/by-name")
@@ -57,7 +64,7 @@ public class MovieController {
   }
 
   @PostMapping("/movies")
-  public ResponseEntity<MovieDTO> saveMovie(@Valid @RequestBody MovieDTO movieDTO) {
+  public ResponseEntity<MovieResponseDTO> saveMovie(@Valid @RequestBody MovieRequestDTO movieDTO) {
 
     if (movieService.existsMovieByNameAndDirector(movieDTO.name(), movieDTO.director())) {
       throw new MovieAlreadyExistsException(movieDTO.name());
@@ -75,7 +82,7 @@ public class MovieController {
   }
 
   @PutMapping("/movies/{id}")
-  public ResponseEntity<?> updateMovie(@Valid @RequestBody MovieDTO movieDTO, @PathVariable long id) {
+  public ResponseEntity<?> updateMovie(@Valid @RequestBody MovieRequestDTO movieDTO, @PathVariable long id) {
 //    MovieDTO movieDTO = MovieMapper.toMovieDTO(movie);
 
     if (movieService.existsMovieById(id)) {
@@ -113,7 +120,7 @@ public class MovieController {
                                                @RequestParam int size) {
     Page<Movie> pageMovie = movieService.findAllMoviesPage(page, size);
 
-    Page<MovieDTO> movieDTOpage = MovieMapper.pageMoviesToMovieDTO(pageMovie);
+    Page<MovieResponseDTO> movieDTOpage = MovieMapper.pageMoviesToMovieDTO(pageMovie);
 
     return ResponseEntity.ok(movieDTOpage);
   }
