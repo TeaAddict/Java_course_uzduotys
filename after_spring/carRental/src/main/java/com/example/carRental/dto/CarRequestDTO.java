@@ -1,11 +1,13 @@
 package com.example.carRental.dto;
 
+import com.example.carRental.model.Rental;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record CarRequestDTO(
         @NotNull
@@ -22,6 +24,8 @@ public record CarRequestDTO(
         int year,
 
         @NotNull
-        String status
+        String status,
+
+        List<Rental> rentals
 ) {
 }

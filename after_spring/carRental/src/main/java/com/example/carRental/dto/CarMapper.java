@@ -13,6 +13,24 @@ public class CarMapper {
     );
   }
 
+  public static CarResponseDTO toCarResponseDTO(Car car) {
+    return new CarResponseDTO(
+            car.getId(),
+            car.getBrand(),
+            car.getModel(),
+            car.getYear(),
+            car.getStatus()
+    );
+  }
+
+  public static void updateCarFromDTO(Car car, CarRequestDTO carRequestDTO) {
+    car.setBrand(carRequestDTO.brand());
+    car.setModel(carRequestDTO.model());
+    car.setYear(carRequestDTO.year());
+    car.setStatus(carRequestDTO.status());
+    car.setRentals(carRequestDTO.rentals());
+  }
+
 }
 //private String brand;
 //private String model;
