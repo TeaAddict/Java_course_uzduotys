@@ -24,6 +24,60 @@ public class Rental {
   private Date rentalEnd;
   private BigDecimal price;
 
+  public Rental(Car car, User user, Date rentalStart, Date rentalEnd, BigDecimal price) {
+    this.car = car;
+    this.user = user;
+    this.rentalStart = rentalStart;
+    this.rentalEnd = rentalEnd;
+    this.price = price;
+  }
+
+  public Rental() {
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public Car getCar() {
+    return car;
+  }
+
+  public void setCar(Car car) {
+    this.car = car;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Date getRentalStart() {
+    return rentalStart;
+  }
+
+  public void setRentalStart(Date rentalStart) {
+    this.rentalStart = rentalStart;
+  }
+
+  public Date getRentalEnd() {
+    return rentalEnd;
+  }
+
+  public void setRentalEnd(Date rentalEnd) {
+    this.rentalEnd = rentalEnd;
+  }
+
+  public BigDecimal getPrice() {
+    return price;
+  }
+
+  public void setPrice(BigDecimal price) {
+    this.price = price;
+  }
 }
 
 //CREATE TABLE rentals (

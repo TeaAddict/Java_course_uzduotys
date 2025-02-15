@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,5 +20,13 @@ public class UserService {
 
   public List<User> getAllUsers() {
     return userRepository.findAll();
+  }
+
+  public Optional<User> getUserById(long id) {
+    return userRepository.findById(id);
+  }
+
+  public User saveUser(User user) {
+    return userRepository.save(user);
   }
 }
