@@ -105,4 +105,12 @@ public class User implements UserDetails {
 //        id BIGINT PRIMARY KEY AUTO_INCREMENT,
 //        username VARCHAR(100) NOT NULL UNIQUE,
 //        password VARCHAR(100) NOT NULL
-//);
+//        );
+
+//CREATE TABLE users_roles (
+//        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+//        user_id BIGINT NOT NULL,
+//        role_id BIGINT NOT NULL,
+//        FOREIGN KEY (user_id) REFERENCES users(id),
+//        FOREIGN KEY (role_id) REFERENCES roles(id)
+//        );

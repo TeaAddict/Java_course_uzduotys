@@ -54,8 +54,15 @@ public class RentalController {
     if (userFromDB.isEmpty()) {
       return ResponseEntity.notFound().build();
     }
-    
-    if (userFromDB.get().getRentals().size() >= 2) {
+
+    List<Car> cars = userFromDB.get()
+            .getRentals()
+            .stream()
+            .map(Rental::getCar)
+            .distinct()
+            .filter(c -> c.getStatus().equalsIgnoreCase("RENTED"))
+            .toList();
+    if (cars.size() >= 2) {
       return ResponseEntity.badRequest().body("User already has rented 2 times");
     }
 

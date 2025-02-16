@@ -85,6 +85,8 @@ public class Rental {
 //        id BIGINT PRIMARY KEY AUTO_INCREMENT,
 //        user_id BIGINT NOT NULL,
 //        car_id BIGINT NOT NULL,
+//        FOREIGN KEY (user_id) REFERENCES users(id),
+//        FOREIGN KEY (car_id) REFERENCES cars(id),
 //        rental_start DATE NOT NULL,
 //        rental_end DATE NOT NULL,
 //        price DECIMAL(10,2) NOT NULL
