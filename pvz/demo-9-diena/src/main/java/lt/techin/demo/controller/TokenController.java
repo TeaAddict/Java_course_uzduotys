@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class TokenController {
 
-  private JwtEncoder encoder;
+  private final JwtEncoder encoder;
 
   // Injects a JwtEncoder bean, which is responsible for creating JWT tokens
   // This JwtEncoder was previously configured in SecurityConfig

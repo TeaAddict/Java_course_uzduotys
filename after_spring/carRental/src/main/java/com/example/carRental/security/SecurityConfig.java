@@ -11,10 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,21 +38,45 @@ public class SecurityConfig {
   @Value("${jwt.private.key}")
   private RSAPrivateKey privateKey;
 
+//  @Bean
+//  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    http.authorizeHttpRequests((authorize) -> authorize
+//                            .requestMatchers(HttpMethod.GET, "/api/cars").hasRole("USER")
+////                    .anyRequest().authenticated()
+//            ).csrf(c -> c.disable())
+//            .httpBasic(Customizer.withDefaults())
+
+  /// /            .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()))
+//            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//            .exceptionHandling((exceptions) -> exceptions
+//                    .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+//                    .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+//            );
+//    return http.build();
+//  }
+
+  // BASIC AUTH
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests((authorize) -> authorize
-                            .requestMatchers(HttpMethod.GET, "/api/cars").permitAll()
-                            .anyRequest().permitAll() // TODO: REMOVE
-//                    .anyRequest().authenticated()
-            ).csrf(c -> c.disable())
+                    .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/cars").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/cars/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/cars/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/cars/available").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/cars").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/rentals").hasRole("USER")
+                    .requestMatchers(HttpMethod.POST, "/api/rentals/return/{rentalId}").hasRole("USER")
+                    .requestMatchers(HttpMethod.GET, "/api/rentals/my").hasRole("USER")
+                    .requestMatchers(HttpMethod.GET, "/api/rentals/history").hasRole("ADMIN")
+                    .anyRequest().authenticated()
+            ).csrf(AbstractHttpConfigurer::disable)
             .httpBasic(Customizer.withDefaults())
-            .oauth2ResourceServer(o -> o.jwt(Customizer.withDefaults()))
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .exceptionHandling((exceptions) -> exceptions
                     .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
                     .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
             );
-
     return http.build();
   }
 

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class TokenController {
-  private JwtEncoder encoder;
+  private final JwtEncoder encoder;
 
   @Autowired
   public TokenController(JwtEncoder encoder) {

@@ -17,9 +17,9 @@ public class Car {
   private int year;
   private String status;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "car_id")
-  private List<Rental> rentals;
+//  @OneToMany(cascade = CascadeType.ALL)
+//  @JoinColumn(name = "car_id")
+//  private List<Rental> rentals;
 
   public Car(String brand, String model, int year, String status) {
     this.brand = brand;
@@ -67,13 +67,6 @@ public class Car {
     this.status = status;
   }
 
-  public List<Rental> getRentals() {
-    return rentals;
-  }
-
-  public void setRentals(List<Rental> rentals) {
-    this.rentals = rentals;
-  }
 }
 
 //CREATE TABLE cars (

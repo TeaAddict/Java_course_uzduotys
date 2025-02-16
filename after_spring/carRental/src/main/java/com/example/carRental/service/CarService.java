@@ -22,6 +22,10 @@ public class CarService {
   public List<Car> findAllCars() {
     return carRepository.findAll();
   }
+  
+  public List<Car> findAllCarsByStatus(String status) {
+    return carRepository.findAllByStatus(status);
+  }
 
   public Car saveCar(Car car) {
     return carRepository.save(car);
@@ -33,5 +37,9 @@ public class CarService {
 
   public Optional<Car> findCarById(long id) {
     return carRepository.findById(id);
+  }
+
+  public void deleteCarById(long id) {
+
   }
 }

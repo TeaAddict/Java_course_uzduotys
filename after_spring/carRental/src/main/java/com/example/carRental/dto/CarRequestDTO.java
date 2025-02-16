@@ -1,10 +1,8 @@
 package com.example.carRental.dto;
 
 import com.example.carRental.model.Rental;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,12 +18,10 @@ public record CarRequestDTO(
 
         @NotNull
         @Min(0)
-        // TODO: Missing max value (currentYear)
-        int year,
-
-        @NotNull
-        String status,
-
-        List<Rental> rentals
+        int year
 ) {
+  @AssertTrue(message = "Car year must be less than current year")
+  public boolean isYearLessThanCurrentYear() {
+    return year <= LocalDate.now().getYear();
+  }
 }

@@ -19,7 +19,6 @@ public record CarResponseDTO(
 
         @NotNull
         @Min(0)
-        // TODO: Missing max value (currentYear)
         int year,
 
         @NotNull

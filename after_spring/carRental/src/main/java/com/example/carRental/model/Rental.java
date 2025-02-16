@@ -3,6 +3,7 @@ package com.example.carRental.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,19 +13,19 @@ public class Rental {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinColumn(name = "car_id")
   private Car car;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
 
-  private Date rentalStart;
-  private Date rentalEnd;
+  private LocalDate rentalStart;
+  private LocalDate rentalEnd;
   private BigDecimal price;
 
-  public Rental(Car car, User user, Date rentalStart, Date rentalEnd, BigDecimal price) {
+  public Rental(Car car, User user, LocalDate rentalStart, LocalDate rentalEnd, BigDecimal price) {
     this.car = car;
     this.user = user;
     this.rentalStart = rentalStart;
@@ -55,19 +56,19 @@ public class Rental {
     this.user = user;
   }
 
-  public Date getRentalStart() {
+  public LocalDate getRentalStart() {
     return rentalStart;
   }
 
-  public void setRentalStart(Date rentalStart) {
+  public void setRentalStart(LocalDate rentalStart) {
     this.rentalStart = rentalStart;
   }
 
-  public Date getRentalEnd() {
+  public LocalDate getRentalEnd() {
     return rentalEnd;
   }
 
-  public void setRentalEnd(Date rentalEnd) {
+  public void setRentalEnd(LocalDate rentalEnd) {
     this.rentalEnd = rentalEnd;
   }
 
@@ -86,5 +87,5 @@ public class Rental {
 //        car_id BIGINT NOT NULL,
 //        rental_start DATE NOT NULL,
 //        rental_end DATE NOT NULL,
-//        price DECIMAL NOT NULL
+//        price DECIMAL(10,2) NOT NULL
 //);

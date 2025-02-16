@@ -7,6 +7,7 @@ import com.example.carRental.dto.UserResponseDTO;
 import com.example.carRental.model.Role;
 import com.example.carRental.model.User;
 import com.example.carRental.service.UserService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,11 @@ public class UserController {
   }
 
   @PostMapping("/users")
-  public ResponseEntity<UserResponseDTO> saveUser(@RequestBody UserRequestDTO userRequestDTO) {
+  public ResponseEntity<?> saveUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+    if (userService.existsByUsername(userRequestDTO.username())) {
+      return ResponseEntity.badRequest().body("Already exists");
+    }
+
     User user = UserMapper.toUser(userRequestDTO);
     user.setPassword(passwordEncoder.encode(userRequestDTO.password()));
     user.setRoles(List.of(new Role(1, "ROLE_USER")));

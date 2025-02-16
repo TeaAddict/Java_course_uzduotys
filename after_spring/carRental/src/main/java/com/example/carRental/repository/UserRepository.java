@@ -3,6 +3,10 @@ package com.example.carRental.repository;
 import com.example.carRental.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
+  public boolean existsByUsername(String username);
+
+  Optional<User> findByUsername(String username);
 }

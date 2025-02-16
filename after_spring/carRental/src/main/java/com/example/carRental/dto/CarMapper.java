@@ -9,7 +9,7 @@ public class CarMapper {
             carRequestDTO.brand(),
             carRequestDTO.model(),
             carRequestDTO.year(),
-            carRequestDTO.status()
+            "AVAILABLE"
     );
   }
 
@@ -27,8 +27,6 @@ public class CarMapper {
     car.setBrand(carRequestDTO.brand());
     car.setModel(carRequestDTO.model());
     car.setYear(carRequestDTO.year());
-    car.setStatus(carRequestDTO.status());
-    car.setRentals(carRequestDTO.rentals());
   }
 
 }
