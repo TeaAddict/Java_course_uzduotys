@@ -1,19 +1,16 @@
 package lt.techin.movie_studio_81.controller;
 
 import jakarta.validation.Valid;
-import lt.techin.movie_studio_81.dto.MovieDTO;
 import lt.techin.movie_studio_81.dto.MovieMapper;
 import lt.techin.movie_studio_81.dto.MovieRequestDTO;
 import lt.techin.movie_studio_81.dto.MovieResponseDTO;
 import lt.techin.movie_studio_81.exception.MovieAlreadyExistsException;
 import lt.techin.movie_studio_81.model.Movie;
 import lt.techin.movie_studio_81.service.MovieService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,8 +29,8 @@ public class MovieController {
 
   @GetMapping("/movies")
   public ResponseEntity<List<MovieResponseDTO>> getAllMovies() {
-    List<MovieResponseDTO> moviesResponseDTO = MovieMapper.toMovieDTOList(movieService.getAllMovies());
-    return ResponseEntity.ok(moviesResponseDTO);
+    List<MovieResponseDTO> movieResponseDTOS = MovieMapper.toMovieResponseDTOS(movieService.getAllMovies());
+    return ResponseEntity.ok(movieResponseDTOS);
   }
 
   @GetMapping("/movies/{id}")
@@ -43,7 +40,7 @@ public class MovieController {
       return ResponseEntity.notFound().build();
     }
 
-    MovieResponseDTO movieResponseDTO = MovieMapper.toMovieDTO(movie.get());
+    MovieResponseDTO movieResponseDTO = MovieMapper.toMovieResponseDTO(movie.get());
     return ResponseEntity.ok(movieResponseDTO);
   }
 
@@ -73,12 +70,14 @@ public class MovieController {
     Movie movie = MovieMapper.toMovie(movieDTO);
     Movie savedMovie = movieService.saveMovie(movie);
 
+    MovieResponseDTO movieResponseDTO = MovieMapper.toMovieResponseDTO(movie);
+
     return ResponseEntity.created(
                     ServletUriComponentsBuilder.fromCurrentRequest()
                             .path("/{id}")
                             .buildAndExpand(savedMovie.getId())
                             .toUri())
-            .body(movieDTO);
+            .body(movieResponseDTO);
   }
 
   @PutMapping("/movies/{id}")

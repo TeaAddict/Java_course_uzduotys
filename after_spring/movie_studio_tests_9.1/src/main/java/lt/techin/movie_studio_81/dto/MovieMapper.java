@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MovieMapper {
 
-  public static List<MovieResponseDTO> toMovieResponseDTOList(List<MovieRequestDTO> movies) {
+  public static List<MovieResponseDTO> toMovieResponseDTOS(List<Movie> movies) {
     return movies.stream()
             .map(movie -> new MovieResponseDTO(
                     movie.getId(),
@@ -19,7 +19,7 @@ public class MovieMapper {
             .toList();
   }
 
-  public static MovieResponseDTO toMovieDTO(MovieRequestDTO movie) {
+  public static MovieResponseDTO toMovieResponseDTO(Movie movie) {
     return new MovieResponseDTO(
             movie.getId(),
             movie.getName(),
@@ -45,6 +45,6 @@ public class MovieMapper {
   }
 
   public static Page<MovieResponseDTO> pageMoviesToMovieDTO(Page<Movie> pageMovie) {
-    return pageMovie.map(MovieMapper::toMovieDTO);
+    return pageMovie.map(MovieMapper::toMovieResponseDTO);
   }
 }

@@ -27,29 +27,4 @@ public record MovieResponseDTO(
         List<Screening> screenings,
         List<Actor> actors
 ) {
-
-  @Override
-  public String name() {
-    return name;
-  }
-
-  @Override
-  public String director() {
-    return director;
-  }
-
-  @Override
-  public String description() {
-    return description;
-  }
-
-  @Override
-  public List<Screening> screenings() {
-    return screenings;
-  }
-
-  @Override
-  public List<Actor> actors() {
-    return actors;
-  }
 }
